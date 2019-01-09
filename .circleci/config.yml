@@ -36,3 +36,15 @@ jobs:
       - run:
           name: Run unit tests
           command: yarn run test
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - install
+      - lint
+          requires:
+            - install
+      - test-unit
+          requires:
+            - install
