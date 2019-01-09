@@ -15,8 +15,8 @@ jobs:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
-          name: Update Yarn config
-          command: yarn config set workspaces-experimental true
+          name: Install Yarn
+          command: npm install -g yarn@1.13.0
       - run:
           name: Install Dependencies
           command: yarn --network-timeout 600000
