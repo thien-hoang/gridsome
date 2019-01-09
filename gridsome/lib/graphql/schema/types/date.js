@@ -26,13 +26,8 @@ exports.dateType = {
   resolve: (obj, args, context, { fieldName }) => {
     const value = obj[fieldName]
 
-    if (Object.keys(args).length > 0) {
-      const { format, locale = 'en' } = args
-
-      return moment
-        .utc(value, ISO_8601_FORMAT, true)
-        .locale(locale)
-        .format(format)
+    if (Object.keys(args).length) {
+      return formatDate(value, args)
     }
 
     return value
@@ -45,15 +40,19 @@ exports.dateTypeField = {
   resolve: (obj, args, context, info) => {
     const value = fieldResolver(obj, args, context, info)
 
-    if (Object.keys(args).length > 0) {
-      const { format, locale = 'en' } = args
-
-      return moment
-        .utc(value, ISO_8601_FORMAT, true)
-        .locale(locale)
-        .format(format)
+    if (Object.keys(args).length) {
+      return formatDate(value, args)
     }
 
     return value
   }
+}
+
+function formatDate (value, args = {}) {
+  const { format, locale = 'en' } = args
+
+  return moment
+    .utc(value, ISO_8601_FORMAT, true)
+    .locale(locale)
+    .format(format)
 }
