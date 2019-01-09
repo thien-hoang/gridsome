@@ -3,7 +3,7 @@ version: 2
 defaults: &defaults
   working_directory: ~/
   docker:
-    - image: circleci/node:8.3.0
+    - image: circleci/node:8.3
 
 jobs:
   install:
@@ -26,6 +26,8 @@ jobs:
   lint:
     <<: *defaults
     steps:
+      - attach_workspace:
+          at: ~/
       - run:
           name: Run ESLint
           command: yarn run lint
@@ -33,6 +35,8 @@ jobs:
   test-unit:
     <<: *defaults
     steps:
+      - attach_workspace:
+          at: ~/
       - run:
           name: Run unit tests
           command: yarn run test
