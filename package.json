@@ -10,7 +10,7 @@
     "test": "node scripts/test.js",
     "test:build": "node scripts/test.js --build",
     "changelog": "node scripts/changelog.js",
-    "lint": "eslint --fix \"gridsome/**/*.js\" \"packages/**/*.js\""
+    "lint": "eslint \"gridsome/**/*.js\" \"packages/**/*.js\""
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
