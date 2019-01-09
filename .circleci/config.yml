@@ -3,7 +3,7 @@ version: 2
 defaults: &defaults
   working_directory: ~/project
   docker:
-    - image: circleci/node:8.3
+    - image: vuejs/ci
 
 jobs:
   install:
@@ -14,9 +14,6 @@ jobs:
           name: Restore Yarn Package Cache
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Yarn
-          command: npm install -g yarn@1.13.0
       - run:
           name: Install Dependencies
           command: yarn --network-timeout 600000
