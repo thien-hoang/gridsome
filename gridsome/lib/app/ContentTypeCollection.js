@@ -5,6 +5,7 @@ const EventEmitter = require('events')
 const camelCase = require('camelcase')
 const slugify = require('@sindresorhus/slugify')
 const { cloneDeep, isObject } = require('lodash')
+const { ISO_8601_FORMAT } = require('../utils/constants')
 const { warn } = require('../utils/log')
 
 const nonValidCharsRE = new RegExp('[^a-zA-Z0-9_]', 'g')
@@ -220,7 +221,7 @@ class ContentTypeCollection extends EventEmitter {
   }
 
   makePath (node) {
-    const date = moment(node.date)
+    const date = moment.utc(node.date, ISO_8601_FORMAT, true)
     const year = node.date ? date.format('YYYY') : null
     const month = node.date ? date.format('MM') : null
     const day = node.date ? date.format('DD') : null
