@@ -22,6 +22,10 @@ jobs:
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project/vue
 
   lint:
     <<: *defaults
