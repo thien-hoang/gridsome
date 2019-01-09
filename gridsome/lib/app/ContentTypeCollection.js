@@ -1,8 +1,8 @@
 const path = require('path')
 const crypto = require('crypto')
+const moment = require('moment')
 const EventEmitter = require('events')
 const camelCase = require('camelcase')
-const dateFormat = require('dateformat')
 const slugify = require('@sindresorhus/slugify')
 const { cloneDeep, isObject } = require('lodash')
 const { warn } = require('../utils/log')
@@ -220,9 +220,10 @@ class ContentTypeCollection extends EventEmitter {
   }
 
   makePath (node) {
-    const year = node.date ? dateFormat(node.date, 'yyyy') : null
-    const month = node.date ? dateFormat(node.date, 'mm') : null
-    const day = node.date ? dateFormat(node.date, 'dd') : null
+    const date = moment(node.date)
+    const year = node.date ? date.format('YYYY') : null
+    const month = node.date ? date.format('MM') : null
+    const day = node.date ? date.format('DD') : null
     const params = { year, month, day, slug: node.slug }
     const { routeKeys } = this.options
 
